@@ -114,13 +114,16 @@ story.}
 
 \section{Evaluation}
 \label{sec:eval}
-\todo{Setup: 9 synthetic prompts derived from DeepLenseSim Models I--III $\times$
-\{no\_sub, cdm, axion\}; max 3 attempts; identical settings per model; real API
-calls + real container execution. Grounding before/after: same model (gpt-5.2),
-same request — 0/3 attempts without the cheat-sheet vs.\ first-attempt pass with
-it. Isolation verification (Table~\ref{tab:isolation}). Scale data point: the
-same stack generated the 9{,}000-image training corpus used by the companion
-pipeline work.}
+\todo{Setup: (1) grounding ablation — the 9 canonical prompts, gpt-5.2 in both
+arms, identical sandbox/retry budget, only the cheat-sheet differs
+(Table~\ref{tab:ablation}); (2) expanded suite — 28 prompts (parameter
+variations, exact-size raw-lenstronomy grids with the size check enforced,
+phrasing styles) $\times$ 3 repeats, grounded (Table~\ref{tab:expanded});
+(3) model comparison gpt-5.2 vs gpt-5.6-luna (Table~\ref{tab:models});
+isolation verification (Table~\ref{tab:isolation}). All runs: real API calls +
+real container execution. State: ungrounded arm not run on the expanded suite.
+Scale data point: the same stack generated the 9{,}000-image training corpus used
+by the companion pipeline work.}
 
 \begin{table}[t]
   \caption{Model comparison on the 9-prompt suite (real generation + sandboxed
@@ -140,6 +143,51 @@ pipeline work.}
     Structured output ok / code parses & 16/16 / 16/16 & 16/16 / 16/16 \\
     Mean generation latency (s) & 13.7 & \textbf{9.4} \\
     Mean wall time per prompt (s) & 26.0 & \textbf{18.1} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \caption{Grounding ablation on the 9-prompt suite: same model (gpt-5.2), same
+  sandbox, same retry budget (3); the only difference is the presence of the
+  version-pinned lenstronomy 1.9.2 cheat-sheet in the system prompt. Without
+  grounding, version-blending errors (wrong signature / wrong attribute) account
+  for 9 of 13 failed attempts and all three unrecovered failures.}
+  \label{tab:ablation}
+  \centering
+  \small
+  \begin{tabular}{lcc}
+    \toprule
+    Metric & Grounded & Ungrounded \\
+    \midrule
+    Final pass (validated image) & \textbf{9/9} & 6/9 \\
+    First-attempt pass & 4/9 & 3/9 \\
+    Mean attempts & 1.67 & 2.11 \\
+    Mean wall per prompt (s) & \textbf{18.8} & 30.1 \\
+    Failed attempts: wrong signature / wrong attribute / other & 0 / 3 / 3 & 3 / 6 / 4 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \caption{Expanded evaluation: 28 prompts (9 canonical + 12 parameter variations
+  + 4 exact-size raw-lenstronomy grids, size-enforced + 3 phrasing styles)
+  $\times$ 3 repeats, grounded, gpt-5.2. Overall pass rate 83/84 = 98.8\%
+  (Wilson 95\% CI [93.6\%, 99.8\%]); the single failure is a wrapper-usage
+  (pyHalo/deeplense) grounding gap, not lenstronomy.}
+  \label{tab:expanded}
+  \centering
+  \small
+  \begin{tabular}{lccc}
+    \toprule
+    Category & Pass & First-attempt & Mean attempts \\
+    \midrule
+    canonical (9$\times$3) & 26/27 & 13/27 & 1.59 \\
+    parameter variations (12$\times$3) & \textbf{36/36} & 18/36 & 1.50 \\
+    custom grid, size enforced (4$\times$3) & \textbf{12/12} & \textbf{12/12} & 1.00 \\
+    phrasing styles (3$\times$3) & 9/9 & 8/9 & 1.11 \\
+    \midrule
+    \textbf{overall} & \textbf{83/84 (98.8\%)} & 51/84 (60.7\%) & 1.42 \\
     \bottomrule
   \end{tabular}
 \end{table}

@@ -83,11 +83,12 @@ execution → validation → retry (error fed back) → `CodegenResult`.
 
 ### A4. Validation harness
 
-`validate_output()` checks (`...:src/dlens/agents/_simulation_codegen.py`):
-ran cleanly (exit 0 + output file produced), output loads as a numpy array, is 2-D,
-all values finite, non-trivial (max − min > 0). Requested-size checking is **NOT**
-implemented (shape is recorded, not asserted) — validation is structural, not
-scientific (see D). On failure, the retry loop feeds the error back (A1).
+`validate_output()` checks (`src/dlens/agents/_simulation_codegen.py`, branch
+`exp/paper2-eval`): ran cleanly (exit 0 + output file produced), output loads as a
+numpy array, is 2-D, all values finite, non-trivial (max − min > 0), and — when the
+request pins an exact size — `matches_requested_size` (added on this branch, with a
+unit test; enforced in the B6 custom_grid category). Validation remains structural,
+not scientific (see D). On failure, the retry loop feeds the error back (A1).
 
 ### A5. HITL and LLM configuration
 
@@ -95,9 +96,9 @@ scientific (see D). On failure, the retry loop feeds the error back (A1).
   human review happens downstream ("the validated code is what gets handed to
   Michael", agent module docstring; workflow agreed 2026-07-11, same docstring).
   (The V1 data-simulation agent's clarify/approve gates are a different system.)
-- LLM: config default is `DEFAULT_CODEGEN_MODEL = "gpt-4o-mini"`
-  (`...:src/dlens/agents/_simulation_codegen.py`) — but all verified runs used
-  **gpt-5.2** (passed explicitly / via the eval harness). **Luna incompatibility
+- LLM: `DEFAULT_CODEGEN_MODEL = "gpt-5.2"` (flipped from gpt-4o-mini on branch
+  `exp/paper2-eval` so the repo matches the paper;
+  `src/dlens/agents/_simulation_codegen.py`). All verified runs use **gpt-5.2**. **Luna incompatibility
   finding:** gpt-5.6-* rejects function tools on `/v1/chat/completions` with
   reasoning enabled (HTTP 400: "use /v1/responses or set reasoning_effort to
   'none'"); the eval drives Luna via `OpenAIResponsesModel`.
@@ -105,7 +106,7 @@ scientific (see D). On failure, the retry loop feeds the error back (A1).
 
 ## B. Evaluation results (all real)
 
-### B1. 9-prompt model comparison (gpt-5.2 vs gpt-5.6-luna)
+### B1. 9-prompt model comparison (gpt-5.2 vs gpt-5.6-luna) — model-choice evidence; for grounded-performance headline numbers use B5/B6 (SUPERSEDES the per-arm details here)
 
 Source: `exp/model-comparison-codegen:docs/MODEL_COMPARISON.md` + raw
 `docs/model_comparison_results.json` (recomputed — matches). Harness:
@@ -129,10 +130,10 @@ attempts; identical prompts/settings.
 `from pyHalo.preset_models import CDM`, which does not exist in the pinned pyHalo
 (`ImportError: cannot import name 'CDM' from 'pyHalo.preset_models'`); never
 recovered. This import is *outside* the lenstronomy cheat-sheet's coverage — the
-same version-grounding gap the sheet fixes for lenstronomy. (Nuance worth a
-footnote: that import IS correct for 2022-era pyHalo — the wrapper itself uses it —
-so it is version blending, not pure hallucination; the failure occurred against the
-image state before the pyHalo era-pin commit `c88954c`.)
+same version-grounding gap the sheet fixes for lenstronomy. **Terminology for the
+paper: this is version blending, not hallucination** — that import IS correct for
+2022-era pyHalo (the DeepLenseSim wrapper itself uses it); the failure occurred
+against the image state before the pyHalo era-pin commit `c88954c`.
 
 ### B2. End-to-end live verification (in-container)
 
@@ -152,8 +153,8 @@ comments themselves are not repo files):
   "gpt-5.2 + this cheat-sheet passes validation on the FIRST attempt … generated
   code correctly uses numPix/deltaPix and PSF(fwhm=...)" against a real 1.9.2
   install.
-- Quantified per-prompt before/after table: exists only in PR #7 comments / chat —
-  **UNVERIFIED-IN-REPO** beyond the commit-message summary above.
+- The anecdotal before/after is now SUPERSEDED by a systematic ablation: see B5
+  (`paper2/docs/GROUNDING_ABLATION.md` + raw JSON).
 
 ### B4. Scale/robustness data point: 9k-image dataset generation
 
@@ -164,6 +165,40 @@ for 3,000 images, 3 parallel containers) are recorded only in local generation l
 (`~/Personal/GSoC/deeplense_data/gen_*.log`, outside the repo) — **cite carefully or
 regenerate logs; UNVERIFIED-IN-REPO**. The held-out test set (1,800 images) was
 also produced by this stack under explicit seeds (docs/PAPER_RUN_RESULTS.md).
+
+### B5. EXPERIMENT A — grounding ablation (2026-07-27; the paper's core table)
+
+Source: `paper2/docs/GROUNDING_ABLATION.md` + `paper2/docs/grounding_ablation.json`;
+harness `scripts/paper2_eval.py` (branch `exp/paper2-eval`). 9 canonical prompts,
+gpt-5.2 both arms, Docker sandbox, 3 attempts; only difference = cheat-sheet present.
+
+| Metric | Grounded | Ungrounded |
+|---|---|---|
+| Final pass | **9/9** | 6/9 |
+| First-attempt | 4/9 | 3/9 |
+| Mean attempts | 1.67 | 2.11 |
+| Mean wall | 18.8 s | 30.1 s |
+| Failed attempts: signature/attribute/other | 0/3/3 | 3/6/4 |
+
+Version-blending errors cause all three unrecovered ungrounded failures; grounded
+arm recovers every failure within budget.
+
+### B6. EXPERIMENT B — expanded suite (2026-07-27; headline evaluation)
+
+Source: `paper2/docs/EXPANDED_EVAL.md` + `paper2/docs/expanded_eval.json`. 28 prompts
+(9 canonical + 12 param variations + 4 exact-size custom grids [enforced by the new
+`matches_requested_size` check] + 3 phrasing styles) × 3 repeats = 84 runs, grounded,
+gpt-5.2.
+
+- **Overall 83/84 = 98.8%** (Wilson 95% CI [93.6%, 99.8%]); first-attempt 60.7%;
+  mean attempts 1.42; wall mean 14.9 s (p90 27.3 s).
+- Per category: canonical 26/27 · param_variation 36/36 · custom_grid **12/12 all
+  first-attempt** · phrasing 9/9.
+- Single hard failure: `Model_III_axion` rep 2 — the DeepLens wrapper's
+  `axion_mass=None` constructor pitfall (deeplense/pyHalo grounding gap, not
+  lenstronomy). Only prompt with mixed pass/fail across repeats.
+- Ungrounded arm NOT run across the expanded suite (time/budget) — A's 9-prompt
+  ablation stands; state this in the paper.
 
 ## C. Motivation hooks
 
@@ -182,23 +217,24 @@ also produced by this stack under explicit seeds (docs/PAPER_RUN_RESULTS.md).
 
 ## D. Reviewer-facing gaps (do not overclaim)
 
-1. **9 prompts is a small evaluation** — synthetic, derived from the same
-   DeepLenseSim recipes the models likely saw in training data; single run per
-   prompt; no error bars.
+1. ~~9 prompts, single run~~ **PARTLY RESOLVED (B6)**: now 28 prompts x 3 repeats
+   (84 runs) with a Wilson CI. Still synthetic/recipe-derived; no scientist-
+   authored prompts yet.
 2. **No ground-truth prompts from the simulation team yet** (requested, not yet
    received) and no user study — "does the generated code match what the scientist
    wanted" is untested.
 3. **pyHalo/deeplense-wrapper grounding missing** — the one observed hard failure
    is exactly this gap.
-4. **Structural, not scientific validation:** checks that *a* finite, non-trivial
-   2-D image was produced — not that the lensing physics is correct, not even that
-   the image size matches the request.
+4. **Structural, not scientific validation:** checks a finite, non-trivial 2-D
+   image; the requested-size check is now implemented (`matches_requested_size`,
+   enforced when the prompt pins a size — B6 custom_grid) but physics correctness
+   is still not validated.
 5. **Single sandbox environment** (one image, one lenstronomy version); portability
    of the grounding claim to other versions is only supported by the regeneration
    script, not by experiments.
-6. Before/after grounding evidence is a 1-prompt demonstration (3/3 fail → 1st-
-   attempt pass) plus commit-message records — not a systematic ablation across the
-   9-prompt suite.
+6. ~~Before/after grounding is a 1-prompt anecdote~~ **RESOLVED (B5)**: systematic
+   9-prompt ablation, same model/sandbox/budget. (Ungrounded arm not yet run on
+   the expanded 28-prompt suite.)
 7. Luna comparison confounds model with API path (chat completions vs Responses).
 
 ## E. Related-work hooks
