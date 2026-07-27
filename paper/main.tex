@@ -56,8 +56,10 @@ Classification in Strong Gravitational Lensing}
 experimentation for lensing substructure; (2) the system — a typed multi-agent
 pipeline with an LLM planner that closes the loop (observe metrics $\to$ one typed
 change $\to$ retrain), plus a tree-based architecture search with an LLM judge;
-(3) headline results — planner closes a 0.23 train/val gap in one intervention
-(+5.0 val pts); full search+tune runs end-to-end in $\sim$6 min on a laptop;
+(3) headline results — the searched architecture beats a hand-picked resnet34
+reference by $+6.1$ points held-out test accuracy (0.8706 vs 0.8100) with
+${\sim}4.4\times$ fewer parameters; the planner closes train/val gaps of 0.18--0.23
+in one intervention; 21 min end-to-end on a laptop;
 (4) honesty clause — prototype, single-seed, limitations stated.}
 \end{abstract}
 
@@ -125,49 +127,55 @@ single seed, no separate test set (val used for both selection and reporting).}
 
 \section{Results and Discussion}
 \label{sec:results}
-\todo{Walk Tables~\ref{tab:planner},~\ref{tab:final}: (1) the planner correctly
-diagnoses overfitting from metrics alone and closes the gap in one intervention;
-(2) full-data baseline numbers; (3) the combined search+tune run (winner
-cnn\_medium\_multistage, 0.29M params; tuned val 0.749) does NOT yet beat the
-planner-tuned resnet34 (0.802) — discuss low-fidelity evaluation bias and the two
-ablation findings (4-epoch noise; task-wording bias). Runtime: 5.9 min end-to-end
-on a laptop; $\sim$4$\times$ estimated for the full dataset.}
+\todo{Walk Tables~\ref{tab:planner},~\ref{tab:final} (definitive gpt-5.2 run,
+held-out test): (1) in both arms the planner diagnoses overfitting from metrics
+alone and closes the gap in one intervention; (2) the searched architecture
+(cnn\_medium\_s4, 2.54M params) beats the resnet34 reference by $+6.1$ points test
+accuracy (0.8706 vs 0.8100) with ${\sim}4.4\times$ fewer parameters, same LLM,
+same data, same protocol; (3) test tracks validation for both arms — no val
+flattery; (4) discuss the earlier ablation findings (4-epoch candidate noise;
+task-wording bias steering the judge) and seeded reproducibility (reference arm's
+iteration-0 metrics reproduce the earlier run exactly). Runtime: 21.0 min
+end-to-end on a laptop (search 7.4 min, tuning arms $\sim$7 min each, test 6 s);
+full-data baseline (resnet34, 7{,}200 images): val 0.8367 / AUC 0.9429.}
 
 \begin{table}[t]
-  \caption{Closed-loop planner trajectory on the 1{,}800-image subset (seeded;
-  planner = gpt-5.2). One planner intervention closes the train/val gap and
-  improves validation accuracy by 5.0 points.}
+  \caption{Closed-loop tuning trajectories for both arms (gpt-5.2 planner, seeded,
+  identical protocol; 1{,}800-image training subset). In each arm the planner
+  diagnoses overfitting from the observed metrics and enables augmentation; the
+  loop's gap-closed guard then stops. ``Val'' is the 1{,}800-image validation split
+  used for all selection.}
   \label{tab:planner}
   \centering
   \small
   \begin{tabular}{llccccc}
     \toprule
-    It. & Configuration & Train & Val & Gap & AUC & Planner decision \\
+    Arm & It. & Train & Validation & Gap & AUC & Planner decision \\
     \midrule
-    0 & resnet34, no regularization, 25 ep & 0.9839 & 0.7517 & 0.2322 & 0.8922 &
-      augment + early stopping \\
-    1 & + augmentation + early stopping & 0.7926 & \textbf{0.8017} &
-      \textbf{$-$0.0091} & \textbf{0.9187} & stop (gap closed) \\
+    search winner & 0 & 0.9994 & 0.8233 & 0.1761 & 0.9434 & augment \\
+    (cnn\_medium\_s4) & 1 & 0.8872 & \textbf{0.8600} & 0.0272 & \textbf{0.9717} & stop (gap closed) \\
+    \midrule
+    resnet34 ref. & 0 & 0.9839 & 0.7517 & 0.2322 & 0.8922 & augment \\
+    & 1 & 0.8233 & \textbf{0.8167} & 0.0066 & 0.9283 & stop (gap closed) \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \begin{table}[t]
-  \caption{Full-dataset baseline (7{,}200 train / 1{,}800 val): resnet34 chosen by
-  the model-design agent, 30 epochs. Errors concentrate in cdm vs.\ axion — the
-  physically hard substructure-type distinction.}
+  \caption{Final results: validation (selection metric) vs.\ held-out test
+  (1{,}800 fresh images, new generation seeds, zero file overlap with train/val;
+  evaluated exactly once after all selection). The searched architecture beats the
+  hand-picked resnet34 reference by $+6.1$ points test accuracy with
+  ${\sim}4.4\times$ fewer parameters; test tracks validation for both arms.}
   \label{tab:final}
   \centering
   \small
-  \begin{tabular}{lcccc}
+  \begin{tabular}{lccccc}
     \toprule
-    Class & Precision & Recall & F1 & $n$ \\
+    Arm & Params & Validation acc. & \textbf{Test acc.} & Validation AUC & \textbf{Test AUC} \\
     \midrule
-    no\_sub & 0.956 & 0.933 & 0.944 & 600 \\
-    cdm     & 0.755 & 0.762 & 0.758 & 600 \\
-    axion   & 0.803 & 0.815 & 0.809 & 600 \\
-    \midrule
-    \multicolumn{5}{l}{Overall: accuracy 0.8367, macro AUC 0.9429.} \\
+    search winner (cnn\_medium\_s4) & 2.54M & 0.8600 & \textbf{0.8706} & 0.9717 & \textbf{0.9700} \\
+    resnet34 reference & 11.17M & 0.8167 & 0.8100 & 0.9283 & 0.9293 \\
     \bottomrule
   \end{tabular}
 \end{table}

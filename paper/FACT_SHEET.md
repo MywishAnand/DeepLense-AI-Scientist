@@ -118,7 +118,33 @@ state view with prediction arrays excluded. `src/dlens/tools/_analysis.py`
 
 ## C. Results (all real runs)
 
-### C1. Planner trajectory (overfitting run; gpt-5.2; seeded; subset)
+### C0. DEFINITIVE PAPER RUN (2026-07-27) — use THESE numbers for headline claims
+
+Source: `docs/PAPER_RUN_RESULTS.md` + `docs/paper_run.json`. gpt-5.2 for every LLM
+role (asserted at run start); held-out test set (1,800 fresh images, seeds
+777/778/779, zero MD5 overlap with train/val) evaluated exactly once after all
+selection; selection on val only; seeded training; 21.0 min total.
+
+- **Search (Phase A, 7.4 min):** 10 candidates (0.024M–31.5M params, 0 unbuildable);
+  judge top-4; 10-epoch real training; winner **cnn_medium_s4** (cnn, depths
+  [2,3,3,4], widths [32,64,128,256], 2.54M params, val 0.7733); refinement round: 3
+  variants, none better.
+- **Tuning arms (identical protocol):** search winner — it0 train 0.9994 / val
+  0.8233 (gap 0.1761) → planner `augment` → it1 val **0.8600**, AUC 0.9717.
+  resnet34 reference — it0 train 0.9839 / val 0.7517 (gap 0.2322; **identical to the
+  Jul 20 run — seeded reproducibility**) → `augment` → it1 val 0.8167, AUC 0.9283.
+- **Final val vs TEST:** search winner val 0.8600 / **test 0.8706**, AUC 0.9717 /
+  **0.9700**; resnet34 ref val 0.8167 / test 0.8100, AUC 0.9283 / 0.9293.
+  **Searched arch beats the reference by +6.1 pts test accuracy with ~4.4× fewer
+  parameters; test tracks val for both arms (no val flattery).**
+- Per-class TEST (winner): no_sub 0.894/1.000/0.944, cdm 0.885/0.720/0.794, axion
+  0.835/0.892/0.862; confusion [600,0,0]/[62,432,106]/[9,56,535]. (Reference
+  per-class in `docs/PAPER_RUN_RESULTS.md`.)
+- Runtime: A 441.5 s · B1 418.0 s · B2 395.6 s · C 6.1 s · total 1,261.2 s.
+- Note: the planner's remedy differed from Jul 20 (augment only vs augment+early-
+  stop) — same diagnosis, LLM decision nondeterminism; reported honestly.
+
+### C1. Planner trajectory (overfitting run; gpt-5.2; seeded; subset) — **SUPERSEDED by C0** (kept as the mechanism demo; its it0 numbers are reproduced exactly by C0's reference arm)
 
 Source: `docs/EXPERIMENT_PLANNER_RESULTS.md` + `docs/experiment_loop_trajectory.json`.
 
@@ -134,7 +160,7 @@ Source: `docs/EXPERIMENT_PLANNER_RESULTS.md` + `docs/experiment_loop_trajectory.
 - Deltas: val +5.0 pts (0.7517→0.8017); gap 0.2322→−0.0091; AUC 0.8922→0.9187.
 - Wall time 6.4 min. `docs/EXPERIMENT_PLANNER_RESULTS.md`.
 
-### C2. Combined run: tree search + tuning (gpt-5.6-luna; seeded; subset)
+### C2. Combined run: tree search + tuning (gpt-5.6-luna; seeded; subset) — **SUPERSEDED by C0** (Luna run; keep only as the model-choice/ablation footnote)
 
 Source: `docs/ARCHITECTURE_SEARCH_RESULTS.md` + `docs/ai_scientist_run.json`.
 
@@ -209,9 +235,10 @@ Source: `docs/CLASSIFICATION_RESULTS.md`.
 1. **Single seed, single run** per experiment — no multi-seed error bars anywhere.
 2. **LLM nondeterminism**: temperature unpinned; planner/search decisions may vary
    across reruns even with seeded training.
-3. **No held-out test set**: the same 1,800-image val split is used both to select
-   architectures (search pruning) and to report final metrics — selection and
-   evaluation are not separated.
+3. ~~No held-out test set~~ **RESOLVED in the definitive run (C0)**: a fresh
+   1,800-image test set (new seed lineage, zero MD5 overlap) is evaluated exactly
+   once after all selection; selection happens on val only. (Still true for the
+   superseded C1/C2 runs.)
 4. Subset (1,800-train) results are **not comparable** to the full-data (7,200) run;
    the paper must not mix them in one table.
 5. Dataset is self-generated with the DeepLenseSim recipe, not the released Model_I
