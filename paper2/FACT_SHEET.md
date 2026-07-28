@@ -166,22 +166,28 @@ for 3,000 images, 3 parallel containers) are recorded only in local generation l
 regenerate logs; UNVERIFIED-IN-REPO**. The held-out test set (1,800 images) was
 also produced by this stack under explicit seeds (docs/PAPER_RUN_RESULTS.md).
 
-### B5. EXPERIMENT A — grounding ablation (2026-07-27; the paper's core table)
+### B5. Grounding ablation — FULL 2-arm study (2026-07-27; the paper's core table; supersedes the 9-prompt pilot below)
 
-Source: `paper2/docs/GROUNDING_ABLATION.md` + `paper2/docs/grounding_ablation.json`;
-harness `scripts/paper2_eval.py` (branch `exp/paper2-eval`). 9 canonical prompts,
-gpt-5.2 both arms, Docker sandbox, 3 attempts; only difference = cheat-sheet present.
+Source: `paper2/docs/GROUNDING_ABLATION.md`; raw
+`paper2/docs/expanded_eval.json` + `paper2/docs/expanded_eval_ungrounded.json`;
+harness `scripts/paper2_eval.py` (branch `exp/paper2-eval`). **28 prompts x 3
+repeats x 2 arms = 168 runs**, gpt-5.2 both arms, Docker sandbox, 3 attempts; only
+difference = cheat-sheet present.
 
 | Metric | Grounded | Ungrounded |
 |---|---|---|
-| Final pass | **9/9** | 6/9 |
-| First-attempt | 4/9 | 3/9 |
-| Mean attempts | 1.67 | 2.11 |
-| Mean wall | 18.8 s | 30.1 s |
-| Failed attempts: signature/attribute/other | 0/3/3 | 3/6/4 |
+| Final pass | **83/84 = 98.8%** [93.6, 99.8] | 70/84 = 83.3% [73.9, 89.8] |
+| First-attempt | 60.7% | 51.2% |
+| Mean attempts | 1.42 | 1.74 |
+| Wall mean / p90 | 14.9 / 27.3 s | 24.6 / 46.7 s |
+| Hard failures | 1 | 14 |
+| Failed attempts: sig/attr/import/other | 5/15/0/16 | 19/34/2/21 |
 
-Version-blending errors cause all three unrecovered ungrounded failures; grounded
-arm recovers every failure within budget.
+CIs do not overlap (+15.5 pts absolute). Version-blending classes cause 55/76
+ungrounded failed attempts and 11/14 hard failures; degradation concentrates in
+wrapper-recipe prompts (canonical 19/27 vs 26/27) while raw-lenstronomy custom
+grids survive (11/12 vs 12/12). Pilot (9 prompts, 1 repeat: 9/9 vs 6/9) kept in
+`grounding_ablation.json` — superseded.
 
 ### B6. EXPERIMENT B — expanded suite (2026-07-27; headline evaluation)
 
@@ -197,8 +203,8 @@ gpt-5.2.
 - Single hard failure: `Model_III_axion` rep 2 — the DeepLens wrapper's
   `axion_mass=None` constructor pitfall (deeplense/pyHalo grounding gap, not
   lenstronomy). Only prompt with mixed pass/fail across repeats.
-- Ungrounded arm NOT run across the expanded suite (time/budget) — A's 9-prompt
-  ablation stands; state this in the paper.
+- Ungrounded arm now run across the full expanded suite — see B5 (168-run
+  2-arm ablation).
 
 ## C. Motivation hooks
 
@@ -232,9 +238,9 @@ gpt-5.2.
 5. **Single sandbox environment** (one image, one lenstronomy version); portability
    of the grounding claim to other versions is only supported by the regeneration
    script, not by experiments.
-6. ~~Before/after grounding is a 1-prompt anecdote~~ **RESOLVED (B5)**: systematic
-   9-prompt ablation, same model/sandbox/budget. (Ungrounded arm not yet run on
-   the expanded 28-prompt suite.)
+6. ~~Before/after grounding is a 1-prompt anecdote~~ **RESOLVED (B5)**: full
+   168-run 2-arm ablation over the expanded suite, same model/sandbox/budget;
+   non-overlapping CIs.
 7. Luna comparison confounds model with API path (chat completions vs Responses).
 
 ## E. Related-work hooks

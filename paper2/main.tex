@@ -119,10 +119,10 @@ arms, identical sandbox/retry budget, only the cheat-sheet differs
 (Table~\ref{tab:ablation}); (2) expanded suite — 28 prompts (parameter
 variations, exact-size raw-lenstronomy grids with the size check enforced,
 phrasing styles) $\times$ 3 repeats, grounded (Table~\ref{tab:expanded});
+(2b) the ablation now covers BOTH arms over the full expanded suite (168 runs);
 (3) model comparison gpt-5.2 vs gpt-5.6-luna (Table~\ref{tab:models});
 isolation verification (Table~\ref{tab:isolation}). All runs: real API calls +
-real container execution. State: ungrounded arm not run on the expanded suite.
-Scale data point: the same stack generated the 9{,}000-image training corpus used
+real container execution. Scale data point: the same stack generated the 9{,}000-image training corpus used
 by the companion pipeline work.}
 
 \begin{table}[t]
@@ -148,11 +148,14 @@ by the companion pipeline work.}
 \end{table}
 
 \begin{table}[t]
-  \caption{Grounding ablation on the 9-prompt suite: same model (gpt-5.2), same
-  sandbox, same retry budget (3); the only difference is the presence of the
-  version-pinned lenstronomy 1.9.2 cheat-sheet in the system prompt. Without
-  grounding, version-blending errors (wrong signature / wrong attribute) account
-  for 9 of 13 failed attempts and all three unrecovered failures.}
+  \caption{Full grounding ablation: the 28-prompt suite $\times$ 3 repeats
+  $\times$ 2 arms (168 runs), gpt-5.2 in both arms, identical sandbox and
+  3-attempt budget; only the version-pinned lenstronomy 1.9.2 cheat-sheet
+  differs. The 95\% Wilson intervals do not overlap. Version-blending errors
+  (wrong signature/attribute/import) account for 55 of the ungrounded arm's 76
+  failed attempts and 11 of its 14 unrecovered failures; degradation concentrates
+  in the version-specific wrapper-recipe prompts (19/27 vs.\ 26/27) while generic
+  raw-lenstronomy requests survive almost intact (11/12 vs.\ 12/12).}
   \label{tab:ablation}
   \centering
   \small
@@ -160,11 +163,13 @@ by the companion pipeline work.}
     \toprule
     Metric & Grounded & Ungrounded \\
     \midrule
-    Final pass (validated image) & \textbf{9/9} & 6/9 \\
-    First-attempt pass & 4/9 & 3/9 \\
-    Mean attempts & 1.67 & 2.11 \\
-    Mean wall per prompt (s) & \textbf{18.8} & 30.1 \\
-    Failed attempts: wrong signature / wrong attribute / other & 0 / 3 / 3 & 3 / 6 / 4 \\
+    Final pass & \textbf{83/84 (98.8\%)} & 70/84 (83.3\%) \\
+    \quad Wilson 95\% CI & [93.6\%, 99.8\%] & [73.9\%, 89.8\%] \\
+    First-attempt pass & 51/84 (60.7\%) & 43/84 (51.2\%) \\
+    Mean attempts & 1.42 & 1.74 \\
+    Wall per prompt, mean / p90 (s) & \textbf{14.9 / 27.3} & 24.6 / 46.7 \\
+    Hard failures (budget exhausted) & 1 & 14 \\
+    Failed attempts: signature / attribute / import / other & 5 / 15 / 0 / 16 & 19 / 34 / 2 / 21 \\
     \bottomrule
   \end{tabular}
 \end{table}
