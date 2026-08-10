@@ -1,0 +1,214 @@
+# Fact sheet — Paper 2: grounded lenstronomy code generation with sandboxed validation
+
+**Scope:** the V2 data-simulation / code-generation agent ONLY (PR #7 lineage:
+NL description → version-grounded code-gen → Docker sandbox execution → validation
+loop). The AI-scientist loop is out of scope (one sentence of context max).
+Sources: branch `feat/simulation-codegen-agent` (system), branch
+`exp/model-comparison-codegen` (evaluation), plus git history. Cross-branch paths
+are written as `<branch>:<path>`. Unverifiable items marked **UNVERIFIED**.
+
+---
+
+## A. System architecture
+
+### A1. Flow and schemas
+
+NL `SimSpec` → code-gen agent (grounded prompt) → `GeneratedProgram` → sandbox
+execution → validation → retry (error fed back) → `CodegenResult`.
+
+| Schema | Fields | Source |
+|---|---|---|
+| `SimSpec` | description (plain-English physics requirement), notes | `feat/simulation-codegen-agent:src/dlens/schemas/_codegen.py` |
+| `GeneratedProgram` | reasoning (inherited from framework OutputSchema), code (self-contained runnable script) | `...:src/dlens/agents/_simulation_codegen.py` |
+| `ValidationResult` | passed, checks{ran, produced_output, is_2d, finite, non_trivial}, image_shape, message | `...:src/dlens/schemas/_codegen.py` |
+| `CodegenResult` | **reasoning** ("The reasoning process of the agent." — framework convention), spec, code, ok, attempts, validation | same file (reasoning added in commit `ebe7579`) |
+
+- Retry loop: `generate_and_validate()` — up to `max_retries` (default 3) attempts;
+  on failure the validation message + stderr (truncated to 2,000 chars) is fed back
+  as `last_error`. `...:src/dlens/agents/_simulation_codegen.py`.
+- Output convention: the generated script must save its final image to the path in
+  the `DLENS_OUTPUT` env var; the sandbox reads it back.
+  `...:src/dlens/tools/_sandbox.py` (module docstring).
+
+### A2. Grounding (the paper's core idea)
+
+- A **version-pinned lenstronomy 1.9.2 API cheat-sheet** is appended to the system
+  prompt: exact imports, call signatures, and kwargs-as-lists conventions,
+  **verified by introspection against the installed version**.
+  `feat/simulation-codegen-agent:src/dlens/prompts/_codegen.py`
+  (`LENSTRONOMY_API_CHEATSHEET`).
+- Representative lines (verbatim):
+  - *"LENSTRONOMY API CHEAT-SHEET (verified against the sandbox's installed
+    version, lenstronomy 1.9.2 — use these EXACT signatures)"*
+  - *"Grid/data (this version uses camelCase numPix/deltaPix):
+    `kwargs_data = sim_util.data_configure_simple(numPix, deltaPix, ...)`"*
+  - *"PSF (use fwhm; there is NO 'sigma' argument):
+    `psf_class = PSF(psf_type='GAUSSIAN', fwhm=0.15, pixel_size=delta_pix)`"*
+- Why it exists (documented motivation): LLMs "blend argument names across versions
+  (e.g. old camelCase `numPix` vs current snake_case `num_pix`; `sigma` vs `fwhm`
+  on PSF)" — same file, module docstring. The casing flip between 1.9.2 and 1.14+
+  is documented in the header comment (lines ~14–16).
+- **Regeneration mechanism:** `scripts/gen_lenstronomy_cheatsheet.py` introspects
+  the *installed* lenstronomy and emits the sheet — run inside the sandbox image
+  when the pin changes. Same branch.
+- **Era-matched dependency pins** (all verified working): python:3.10-slim, numpy<2,
+  scipy<1.14, astropy<6 (newer astropy removes `isiterable`, which lenstronomy 1.9.2
+  imports), lenstronomy==1.9.2, pyHalo pinned to 2022-era commit `64582db` and
+  installed editable (non-editable drops subpackages like `pyHalo.Cosmology`;
+  post-2022-07-10 commits need a newer lenstronomy). `...:sandbox/Dockerfile`
+  (comments), commits `4b35054`, `c88954c`.
+- **Known gap: pyHalo is NOT covered by the cheat-sheet** — documented as the cause
+  of the one evaluation failure (see B1).
+  `exp/model-comparison-codegen:docs/MODEL_COMPARISON.md` (Failure modes).
+
+### A3. Sandbox
+
+- **Image** (`...:sandbox/Dockerfile`): python:3.10-slim base; era-pinned stack
+  (A2); non-root user `sandbox` (uid 10001); apt upgrade for base CVEs. Live local
+  image size **1.58 GB** (verified via `docker images`; includes the editable pyHalo
+  clone). Build time: **UNVERIFIED** (not logged).
+- **Execution** (`...:src/dlens/tools/_sandbox.py`, `DockerSandbox.run()`): writes
+  the script to a temp job dir, mounts it at `/work`, runs
+  `--network=none --memory=2g --cpus=1 --pids-limit=256` with a `timeout`-wrapped
+  python invocation (default 120 s); output only via the mounted dir
+  (`DLENS_OUTPUT=/work/output.npy`).
+- **LocalSandbox fallback**: host subprocess, explicitly documented as
+  "INSECURE — offline tests / trusted code only". Same file.
+- **Verified isolation evidence** (recorded in commit `6b1964b`'s message, run via
+  the production `DockerSandbox.run()` path): Linux/linuxkit guest (host: Darwin),
+  non-root uid 10001, network blocked (OSError on connect with `--network=none`),
+  cgroup caps applied (memory.max = 2 GiB, cpu.max = 1 CPU), lenstronomy 1.9.2
+  executed inside.
+- Per-run overhead Docker vs LocalSandbox: **UNVERIFIED** (not measured).
+
+### A4. Validation harness
+
+`validate_output()` checks (`...:src/dlens/agents/_simulation_codegen.py`):
+ran cleanly (exit 0 + output file produced), output loads as a numpy array, is 2-D,
+all values finite, non-trivial (max − min > 0). Requested-size checking is **NOT**
+implemented (shape is recorded, not asserted) — validation is structural, not
+scientific (see D). On failure, the retry loop feeds the error back (A1).
+
+### A5. HITL and LLM configuration
+
+- **No HITL gates inside this path** — the generate→validate loop is automatic;
+  human review happens downstream ("the validated code is what gets handed to
+  Michael", agent module docstring; workflow agreed 2026-07-11, same docstring).
+  (The V1 data-simulation agent's clarify/approve gates are a different system.)
+- LLM: config default is `DEFAULT_CODEGEN_MODEL = "gpt-4o-mini"`
+  (`...:src/dlens/agents/_simulation_codegen.py`) — but all verified runs used
+  **gpt-5.2** (passed explicitly / via the eval harness). **Luna incompatibility
+  finding:** gpt-5.6-* rejects function tools on `/v1/chat/completions` with
+  reasoning enabled (HTTP 400: "use /v1/responses or set reasoning_effort to
+  'none'"); the eval drives Luna via `OpenAIResponsesModel`.
+  `exp/model-comparison-codegen:docs/MODEL_COMPARISON.md`.
+
+## B. Evaluation results (all real)
+
+### B1. 9-prompt model comparison (gpt-5.2 vs gpt-5.6-luna)
+
+Source: `exp/model-comparison-codegen:docs/MODEL_COMPARISON.md` + raw
+`docs/model_comparison_results.json` (recomputed — matches). Harness:
+`scripts/model_comparison_eval.py` (same branch). 9 synthetic prompts derived from
+DeepLenseSim Models I/II/III × {no_sub, cdm, axion}
+(`feat/simulation-codegen-agent:src/dlens/data/sim_prompts.py`; Model_IV omitted —
+its scripts are empty upstream). Real API calls + real Docker execution; max 3
+attempts; identical prompts/settings.
+
+| Metric | gpt-5.2 | gpt-5.6-luna |
+|---|---|---|
+| Final pass (validated image) | **9/9** | 8/9 |
+| First-attempt pass | 2/9 | 3/9 |
+| Mean attempts | 1.78 | 1.78 |
+| Schema ok / code parses (per generation) | 16/16 · 16/16 | 16/16 · 16/16 |
+| Mean generation latency | 13.7 s | 9.4 s |
+| Mean wall/prompt (incl. sandbox) | 26.0 s | 18.1 s |
+| API | chat completions | requires `/v1/responses` |
+
+**Luna's failure in detail:** `Model_III_axion`, all 3 attempts — generated
+`from pyHalo.preset_models import CDM`, which does not exist in the pinned pyHalo
+(`ImportError: cannot import name 'CDM' from 'pyHalo.preset_models'`); never
+recovered. This import is *outside* the lenstronomy cheat-sheet's coverage — the
+same version-grounding gap the sheet fixes for lenstronomy. (Nuance worth a
+footnote: that import IS correct for 2022-era pyHalo — the wrapper itself uses it —
+so it is version blending, not pure hallucination; the failure occurred against the
+image state before the pyHalo era-pin commit `c88954c`.)
+
+### B2. End-to-end live verification (in-container)
+
+Commit `6b1964b` (message): `--live` run with gpt-5.2 — generated code executed
+**inside the Docker container** via `DockerSandbox` and **passed validation on the
+first attempt** (150×150 lensed image, matching the Model_I-style prompt).
+
+### B3. Cheat-sheet before/after evidence
+
+Recorded in git history (commit messages; also in PR #7 comments on GitHub — the
+comments themselves are not repo files):
+- `2438301`: without grounding, gpt-5.2 "wrote idiomatic code but used old camelCase
+  kwargs (numPix) and a nonexistent PSF 'sigma' arg, **failing 3/3 attempts**";
+  with the introspection-verified sheet, "same model, same request now **passes
+  validation on the FIRST attempt**".
+- `4b35054`: sheet re-keyed to 1.9.2 after introspecting it (camelCase confirmed);
+  "gpt-5.2 + this cheat-sheet passes validation on the FIRST attempt … generated
+  code correctly uses numPix/deltaPix and PSF(fwhm=...)" against a real 1.9.2
+  install.
+- Quantified per-prompt before/after table: exists only in PR #7 comments / chat —
+  **UNVERIFIED-IN-REPO** beyond the commit-message summary above.
+
+### B4. Scale/robustness data point: 9k-image dataset generation
+
+The same sandbox stack generated the full training dataset used elsewhere: 9,000
+Model_I images (3,000/class, 150×150, ~809 MB) — `docs/CLASSIFICATION_RESULTS.md`
+(current branch). Zero failed realizations and per-class runtimes (~1,109–1,159 s
+for 3,000 images, 3 parallel containers) are recorded only in local generation logs
+(`~/Personal/GSoC/deeplense_data/gen_*.log`, outside the repo) — **cite carefully or
+regenerate logs; UNVERIFIED-IN-REPO**. The held-out test set (1,800 images) was
+also produced by this stack under explicit seeds (docs/PAPER_RUN_RESULTS.md).
+
+## C. Motivation hooks
+
+- **Manual workflow today:** DeepLenseSim datasets are produced by hand-written
+  per-model scripts (`Model_I/sim_{no_sub,cdm,axion}.py` upstream;
+  github.com/mwt5345/DeepLenseSim) run by the simulation lead — the agent's NL→code
+  path automates authoring new variants. Use case: "the validated code is what gets
+  handed to Michael" (agent docstring); intended standalone use by the simulation
+  team (`sandbox/README.md`, same branch).
+- **Version fragility (the problem grounding solves):** lenstronomy's API changed
+  argument casing across versions (numPix→num_pix; PSF sigma vs fwhm); DeepLenseSim
+  additionally requires era-matched astropy/scipy/pyHalo — naive codegen against
+  "lenstronomy in general" produces plausible-but-broken calls. Sources:
+  `prompts/_codegen.py` docstring, `sandbox/Dockerfile` comments, commits
+  `4b35054`/`c88954c`, MODEL_COMPARISON failure modes.
+
+## D. Reviewer-facing gaps (do not overclaim)
+
+1. **9 prompts is a small evaluation** — synthetic, derived from the same
+   DeepLenseSim recipes the models likely saw in training data; single run per
+   prompt; no error bars.
+2. **No ground-truth prompts from the simulation team yet** (requested, not yet
+   received) and no user study — "does the generated code match what the scientist
+   wanted" is untested.
+3. **pyHalo/deeplense-wrapper grounding missing** — the one observed hard failure
+   is exactly this gap.
+4. **Structural, not scientific validation:** checks that *a* finite, non-trivial
+   2-D image was produced — not that the lensing physics is correct, not even that
+   the image size matches the request.
+5. **Single sandbox environment** (one image, one lenstronomy version); portability
+   of the grounding claim to other versions is only supported by the regeneration
+   script, not by experiments.
+6. Before/after grounding evidence is a 1-prompt demonstration (3/3 fail → 1st-
+   attempt pass) plus commit-message records — not a systematic ablation across the
+   9-prompt suite.
+7. Luna comparison confounds model with API path (chat completions vs Responses).
+
+## E. Related-work hooks
+
+- **HEPTAPOD** (arXiv:2512.15867) — schema-validated tool design inspiration (cited
+  in the Test II notebook / standalone repo README; github.com/aatmaj28/deeplense-sim-agent).
+- **lenstronomy** (Birrer & Amara 2018), **pyHalo** (Gilman et al. 2020),
+  **DeepLense papers** (arXiv:1909.07346, 2008.12731, 2112.12121), **DeepLenseSim**
+  (github.com/mwt5345/DeepLenseSim).
+- **TODO (need citations, not yet researched):** LLM code generation (e.g. Codex/
+  HumanEval line), execution-feedback / self-repair codegen, sandboxed code
+  execution for agents, LLM API-hallucination studies, retrieval/documentation-
+  grounded codegen. Marked as TODO stubs in references.bib.
