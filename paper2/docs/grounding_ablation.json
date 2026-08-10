@@ -1,0 +1,634 @@
+{
+  "model": "gpt-5.2",
+  "max_retries": 3,
+  "repeats": 1,
+  "arms": {
+    "grounded": {
+      "Model_I_no_sub": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 11.1,
+                "parses": true,
+                "exec_s": 2.9,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 14.0
+          }
+        ]
+      },
+      "Model_I_cdm": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 16.7,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 17.9
+          }
+        ]
+      },
+      "Model_I_axion": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 5.8,
+                "parses": true,
+                "exec_s": 1.9,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 17.0,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 2,
+            "wall_s": 25.9
+          }
+        ]
+      },
+      "Model_II_no_sub": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.9,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 6.6
+          }
+        ]
+      },
+      "Model_II_cdm": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.2,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 5.9
+          }
+        ]
+      },
+      "Model_II_axion": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.2,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 6.5,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 2,
+            "wall_s": 14.3
+          }
+        ]
+      },
+      "Model_III_no_sub": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 5.3,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 14.9,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 2,
+            "wall_s": 23.1
+          }
+        ]
+      },
+      "Model_III_cdm": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.6,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 18.0,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 2,
+            "wall_s": 25.5
+          }
+        ]
+      },
+      "Model_III_axion": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.9,
+                "parses": true,
+                "exec_s": 2.7,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 6.3,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 20.0,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              101,
+              101
+            ],
+            "n_attempts": 3,
+            "wall_s": 35.8
+          }
+        ]
+      }
+    },
+    "ungrounded": {
+      "Model_I_no_sub": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 7.6,
+                "parses": true,
+                "exec_s": 2.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 9.7
+          }
+        ]
+      },
+      "Model_I_cdm": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 26.1,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: TNFW.derivatives() got an unexpected keyword argument 'kappa_s'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 16.5,
+                "parses": true,
+                "exec_s": 0.9,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageData.__init__() got an unexpected keyword argument 'pixel_width'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 17.8,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.util' has no attribute 'kernel_gaussian'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 63.4,
+            "final_category": "wrong_api_attribute"
+          }
+        ]
+      },
+      "Model_I_axion": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 20.3,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageData.__init__() got an unexpected keyword argument 'num_pixel_x'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 9.7,
+                "parses": true,
+                "exec_s": 1.6,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 17.2,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "ValueError: too many values to unpack (expected 5)"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 51.6,
+            "final_category": "other"
+          }
+        ]
+      },
+      "Model_II_no_sub": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 5.2,
+                "parses": true,
+                "exec_s": 1.6,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 6.8
+          }
+        ]
+      },
+      "Model_II_cdm": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 5.2,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 6.9
+          }
+        ]
+      },
+      "Model_II_axion": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.0,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 5.9,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 2,
+            "wall_s": 13.3
+          }
+        ]
+      },
+      "Model_III_no_sub": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.1,
+                "parses": true,
+                "exec_s": 1.6,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 19.0,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 2,
+            "wall_s": 25.9
+          }
+        ]
+      },
+      "Model_III_cdm": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.9,
+                "parses": true,
+                "exec_s": 3.5,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 22.2,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.simulation_util' has no attribute 'make_grid_with_coordtransform'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 4.6,
+                "parses": true,
+                "exec_s": 1.6,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 36.8,
+            "final_category": "wrong_api_attribute"
+          }
+        ]
+      },
+      "Model_III_axion": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.3,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 23.1,
+                "parses": true,
+                "exec_s": 2.2,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 24.0,
+                "parses": true,
+                "exec_s": 1.4,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 3,
+            "wall_s": 56.7
+          }
+        ]
+      }
+    }
+  }
+}
