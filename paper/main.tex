@@ -58,7 +58,7 @@ pipeline with an LLM planner that closes the loop (observe metrics $\to$ one typ
 change $\to$ retrain), plus a tree-based architecture search with an LLM judge;
 (3) headline results — the searched architecture beats a hand-picked resnet34
 reference by $+6.1$ points held-out test accuracy (0.8706 vs 0.8100) with
-${\sim}4.4\times$ fewer parameters; the planner closes train/val gaps of 0.18--0.23
+${\sim}8.4\times$ fewer parameters; the planner closes train/val gaps of 0.18--0.23
 in one intervention; 21 min end-to-end on a laptop;
 (4) honesty clause — prototype, single-seed, limitations stated.}
 \end{abstract}
@@ -131,7 +131,7 @@ single seed, no separate test set (val used for both selection and reporting).}
 held-out test): (1) in both arms the planner diagnoses overfitting from metrics
 alone and closes the gap in one intervention; (2) the searched architecture
 (cnn\_medium\_s4, 2.54M params) beats the resnet34 reference by $+6.1$ points test
-accuracy (0.8706 vs 0.8100) with ${\sim}4.4\times$ fewer parameters, same LLM,
+accuracy (0.8706 vs 0.8100) with ${\sim}8.4\times$ fewer parameters, same LLM,
 same data, same protocol; (3) test tracks validation for both arms — no val
 flattery; (4) discuss the earlier ablation findings (4-epoch candidate noise;
 task-wording bias steering the judge) and seeded reproducibility (reference arm's
@@ -166,7 +166,7 @@ full-data baseline (resnet34, 7{,}200 images): val 0.8367 / AUC 0.9429.}
   (1{,}800 fresh images, new generation seeds, zero file overlap with train/val;
   evaluated exactly once after all selection). The searched architecture beats the
   hand-picked resnet34 reference by $+6.1$ points test accuracy with
-  ${\sim}4.4\times$ fewer parameters; test tracks validation for both arms.}
+  ${\sim}8.4\times$ fewer parameters; test tracks validation for both arms.}
   \label{tab:final}
   \centering
   \small
@@ -175,7 +175,7 @@ full-data baseline (resnet34, 7{,}200 images): val 0.8367 / AUC 0.9429.}
     Arm & Params & Validation acc. & \textbf{Test acc.} & Validation AUC & \textbf{Test AUC} \\
     \midrule
     search winner (cnn\_medium\_s4) & 2.54M & 0.8600 & \textbf{0.8706} & 0.9717 & \textbf{0.9700} \\
-    resnet34 reference & 11.17M & 0.8167 & 0.8100 & 0.9283 & 0.9293 \\
+    resnet34 reference & 21.28M & 0.8167 & 0.8100 & 0.9283 & 0.9293 \\
     \bottomrule
   \end{tabular}
 \end{table}
