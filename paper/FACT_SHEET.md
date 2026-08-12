@@ -135,7 +135,7 @@ selection; selection on val only; seeded training; 21.0 min total.
   Jul 20 run — seeded reproducibility**) → `augment` → it1 val 0.8167, AUC 0.9283.
 - **Final val vs TEST:** search winner val 0.8600 / **test 0.8706**, AUC 0.9717 /
   **0.9700**; resnet34 ref val 0.8167 / test 0.8100, AUC 0.9283 / 0.9293.
-  **Searched arch beats the reference by +6.1 pts test accuracy with ~4.4× fewer
+  **Searched arch beats the reference by +6.1 pts test accuracy with ~8.4× fewer
   parameters; test tracks val for both arms (no val flattery).**
 - Per-class TEST (winner): no_sub 0.894/1.000/0.944, cdm 0.885/0.720/0.794, axion
   0.835/0.892/0.862; confusion [600,0,0]/[62,432,106]/[9,56,535]. (Reference
