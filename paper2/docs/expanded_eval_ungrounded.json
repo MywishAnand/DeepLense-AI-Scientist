@@ -1,0 +1,2497 @@
+{
+  "model": "gpt-5.2",
+  "max_retries": 3,
+  "repeats": 3,
+  "arms": {
+    "ungrounded": {
+      "Model_I_no_sub": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 17.8,
+                "parses": true,
+                "exec_s": 2.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 19.9
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 12.0,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 13.1
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 11.8,
+                "parses": true,
+                "exec_s": 0.9,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageData.__init__() got an unexpected keyword argument 'pixel_width'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 15.2,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 2,
+            "wall_s": 29.1
+          }
+        ]
+      },
+      "Model_I_cdm": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 17.3,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 18.4
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 11.9,
+                "parses": true,
+                "exec_s": 2.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 14.1
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 20.0,
+                "parses": true,
+                "exec_s": 1.3,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "ValueError: too many values to unpack (expected 5)"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 6.6,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: DeepLens.make_source_light() got an unexpected keyword argument 'profile'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 20.5,
+                "parses": true,
+                "exec_s": 1.3,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 3,
+            "wall_s": 51.4
+          }
+        ]
+      },
+      "Model_I_axion": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 12.6,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 17.0,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.util' has no attribute 'kernel_util'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 19.4,
+                "parses": true,
+                "exec_s": 1.4,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 3,
+            "wall_s": 53.3
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 15.3,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageData.__init__() got an unexpected keyword argument 'num_pixel_x'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 7.4,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 17.8,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageModel.__init__() got an unexpected keyword argument 'point_source_model_class'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 44.3,
+            "final_category": "wrong_signature"
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 8.7,
+                "parses": true,
+                "exec_s": 1.9,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 17.8,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 2,
+            "wall_s": 29.6
+          }
+        ]
+      },
+      "Model_II_no_sub": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.4,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 5.1
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.6,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 5.3
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.9,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 5.7
+          }
+        ]
+      },
+      "Model_II_cdm": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.7,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 6.4
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.6,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 6.4
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.3,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 6.1
+          }
+        ]
+      },
+      "Model_II_axion": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.3,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 7.0,
+                "parses": true,
+                "exec_s": 2.3,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 2,
+            "wall_s": 15.4
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.9,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 17.3,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 2,
+            "wall_s": 24.2
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.3,
+                "parses": true,
+                "exec_s": 1.9,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 16.2,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 2,
+            "wall_s": 22.6
+          }
+        ]
+      },
+      "Model_III_no_sub": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.0,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 21.8,
+                "parses": true,
+                "exec_s": 1.3,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 2,
+            "wall_s": 28.8
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.9,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 23.9,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_import",
+                "error": "ModuleNotFoundError: No module named 'lenstronomy.PointSpreadFunction'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 4.8,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 37.2,
+            "final_category": "wrong_api_attribute"
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.5,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 15.4,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              101,
+              101
+            ],
+            "n_attempts": 2,
+            "wall_s": 22.8
+          }
+        ]
+      },
+      "Model_III_cdm": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.2,
+                "parses": true,
+                "exec_s": 1.6,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 27.1,
+                "parses": true,
+                "exec_s": 1.5,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "ValueError: too many values to unpack (expected 7)"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 4.7,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 40.9,
+            "final_category": "wrong_api_attribute"
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.8,
+                "parses": true,
+                "exec_s": 1.9,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 26.0,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.util' has no attribute 'magnitude2cps'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 5.1,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 39.7,
+            "final_category": "wrong_api_attribute"
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 5.0,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 25.1,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_import",
+                "error": "ImportError: cannot import name 'magnitude2amplitude' from 'lenstronomy.Util.data_util' (/usr/local/lib/python3.10/site-packages/lenstronomy/Util/data_util.py)"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 5.1,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 39.7,
+            "final_category": "wrong_api_attribute"
+          }
+        ]
+      },
+      "Model_III_axion": {
+        "category": "canonical",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.0,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 10.8,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 23.9,
+                "parses": true,
+                "exec_s": 1.3,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: Sersic.function() got an unexpected keyword argument 'e1'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 43.6,
+            "final_category": "wrong_signature"
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.7,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 19.4,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: Sersic.function() got an unexpected keyword argument 'e1'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 4.5,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 32.2,
+            "final_category": "other"
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.7,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 17.9,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: SimAPI.__init__() missing 1 required positional argument: 'kwargs_model'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 4.3,
+                "parses": true,
+                "exec_s": 1.6,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 31.2,
+            "final_category": "other"
+          }
+        ]
+      },
+      "var_halo_low": {
+        "category": "param_variation",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.8,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 6.6
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.0,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 5.7
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.0,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 5.7
+          }
+        ]
+      },
+      "var_halo_high": {
+        "category": "param_variation",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.4,
+                "parses": true,
+                "exec_s": 1.9,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 5.3
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.8,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 5.5
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.0,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 5.7
+          }
+        ]
+      },
+      "var_redshifts_1": {
+        "category": "param_variation",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 13.4,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: Sersic.function() got an unexpected keyword argument 'e1'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 16.8,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.util' has no attribute 'phi_q2_ellipticity'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 15.1,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 3,
+            "wall_s": 48.6
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 15.2,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 1,
+            "wall_s": 16.2
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 15.4,
+                "parses": true,
+                "exec_s": 1.3,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.util' has no attribute 'kernel_gaussian'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 14.5,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 2,
+            "wall_s": 32.3
+          }
+        ]
+      },
+      "var_redshifts_2": {
+        "category": "param_variation",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 36.4,
+                "parses": true,
+                "exec_s": 1.3,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageModel.image() got an unexpected keyword argument 'lens_model_kwargs'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 21.1,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.util' has no attribute 'sig2fwhm'. Did you mean: 'sigma2fwhm'?"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 19.3,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              96,
+              96
+            ],
+            "n_attempts": 3,
+            "wall_s": 80.4
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 6.9,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 8.7
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 25.1,
+                "parses": true,
+                "exec_s": 1.9,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 27.0
+          }
+        ]
+      },
+      "var_axion_specific": {
+        "category": "param_variation",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 16.8,
+                "parses": true,
+                "exec_s": 1.9,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 1,
+            "wall_s": 18.7
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 17.3,
+                "parses": true,
+                "exec_s": 2.4,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              120,
+              120
+            ],
+            "n_attempts": 1,
+            "wall_s": 19.7
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 25.8,
+                "parses": true,
+                "exec_s": 1.9,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "ValueError: too many values to unpack (expected 6)"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 18.7,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              80,
+              80
+            ],
+            "n_attempts": 2,
+            "wall_s": 48.1
+          }
+        ]
+      },
+      "var_vortex_light": {
+        "category": "param_variation",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 18.5,
+                "parses": true,
+                "exec_s": 1.9,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 1,
+            "wall_s": 20.4
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 8.1,
+                "parses": true,
+                "exec_s": 1.9,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 5.5,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 2,
+            "wall_s": 17.2
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 6.4,
+                "parses": true,
+                "exec_s": 1.6,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 18.9,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.util' has no attribute 'phi_q2_ellipticity'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 17.6,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 3,
+            "wall_s": 46.7
+          }
+        ]
+      },
+      "var_euclid_halo": {
+        "category": "param_variation",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.7,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 5.4
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.1,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 5.9
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.5,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 6.2
+          }
+        ]
+      },
+      "var_hst_cdm_z": {
+        "category": "param_variation",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.7,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 30.6,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.util' has no attribute 'phi_q2_ellipticity'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 5.7,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 45.6,
+            "final_category": "wrong_api_attribute"
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.6,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 34.9,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 2,
+            "wall_s": 42.3
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 5.9,
+                "parses": true,
+                "exec_s": 1.6,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 31.8,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.util' has no attribute 'phi_q2_ellipticity'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 6.6,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 48.7,
+            "final_category": "wrong_api_attribute"
+          }
+        ]
+      },
+      "var_euclid_axion_mass": {
+        "category": "param_variation",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 5.1,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 5.2,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 2,
+            "wall_s": 13.7
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 5.3,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 5.3,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 2,
+            "wall_s": 14.1
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 7.1,
+                "parses": true,
+                "exec_s": 1.6,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "RuntimeError: DeepLens.make_vortex(mass) not available in this environment/version; cannot create requested vortex substructure."
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 23.0,
+                "parses": true,
+                "exec_s": 0.9,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "numpy.exceptions.AxisError: axis -2 is out of bounds for array of dimension 1"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 7.9,
+                "parses": true,
+                "exec_s": 1.6,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 42.1,
+            "final_category": "wrong_signature"
+          }
+        ]
+      },
+      "var_nosub_deep_source": {
+        "category": "param_variation",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 21.7,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'LensCosmo' object has no attribute 'nfw_physical2lensing'. Did you mean: 'nfw_physical2angle'?"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 17.6,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: Sersic.function() got an unexpected keyword argument 'e1'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 14.1,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 3,
+            "wall_s": 56.7
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 18.5,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'LensCosmo' object has no attribute 'sis_theta_E'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 16.5,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 2,
+            "wall_s": 37.1
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 22.9,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageData.__init__() got an unexpected keyword argument 'num_pixel_x'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 13.8,
+                "parses": true,
+                "exec_s": 0.9,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageData.__init__() got an unexpected keyword argument 'delta_pix'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 13.7,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageModel.__init__() got an unexpected keyword argument 'point_source_model_class'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 53.3,
+            "final_category": "wrong_signature"
+          }
+        ]
+      },
+      "var_cdm_massive_close": {
+        "category": "param_variation",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 9.0,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 10.7
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 22.3,
+                "parses": true,
+                "exec_s": 0.9,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageData.__init__() got an unexpected keyword argument 'num_pixel'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 21.2,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 2,
+            "wall_s": 45.6
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 22.3,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              100,
+              100
+            ],
+            "n_attempts": 1,
+            "wall_s": 23.4
+          }
+        ]
+      },
+      "var_hst_nosub": {
+        "category": "param_variation",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.6,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 20.0,
+                "parses": true,
+                "exec_s": 1.5,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              101,
+              101
+            ],
+            "n_attempts": 2,
+            "wall_s": 26.8
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 3.2,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 6.6,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: SersicElliptic.function() got an unexpected keyword argument 'magnitude'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 21.9,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              101,
+              101
+            ],
+            "n_attempts": 3,
+            "wall_s": 36.1
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 4.7,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 17.9,
+                "parses": true,
+                "exec_s": 2.0,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.simulation_util' has no attribute 'kernel_util'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 4.7,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 32.8,
+            "final_category": "wrong_api_attribute"
+          }
+        ]
+      },
+      "grid_128_psf02": {
+        "category": "custom_grid",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 18.8,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              128,
+              128
+            ],
+            "n_attempts": 1,
+            "wall_s": 19.8
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 15.2,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              128,
+              128
+            ],
+            "n_attempts": 1,
+            "wall_s": 16.2
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 13.8,
+                "parses": true,
+                "exec_s": 1.4,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              128,
+              128
+            ],
+            "n_attempts": 1,
+            "wall_s": 15.2
+          }
+        ]
+      },
+      "grid_96_psf01": {
+        "category": "custom_grid",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 12.6,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              96,
+              96
+            ],
+            "n_attempts": 1,
+            "wall_s": 13.6
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 17.6,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              96,
+              96
+            ],
+            "n_attempts": 1,
+            "wall_s": 18.6
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 16.7,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.util' has no attribute 'phi_q2_ellipticity'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 15.7,
+                "parses": true,
+                "exec_s": 1.2,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              96,
+              96
+            ],
+            "n_attempts": 2,
+            "wall_s": 34.6
+          }
+        ]
+      },
+      "grid_200_psf03": {
+        "category": "custom_grid",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 16.7,
+                "parses": true,
+                "exec_s": 1.3,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: module 'lenstronomy.Util.util' has no attribute 'phi_q2_ellipticity'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 17.2,
+                "parses": true,
+                "exec_s": 1.3,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              200,
+              200
+            ],
+            "n_attempts": 2,
+            "wall_s": 36.5
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 16.0,
+                "parses": true,
+                "exec_s": 2.3,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              200,
+              200
+            ],
+            "n_attempts": 1,
+            "wall_s": 18.3
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 14.7,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              200,
+              200
+            ],
+            "n_attempts": 1,
+            "wall_s": 15.8
+          }
+        ]
+      },
+      "grid_64_raw": {
+        "category": "custom_grid",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 10.2,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageData.__init__() got an unexpected keyword argument 'pixel_width'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 14.1,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 2,
+            "wall_s": 26.4
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 12.4,
+                "parses": true,
+                "exec_s": 0.9,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageData.__init__() got an unexpected keyword argument 'x_at_radec_0'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 14.1,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_signature",
+                "error": "TypeError: ImageData.__init__() got an unexpected keyword argument 'pixel_grid'"
+              },
+              {
+                "n": 3,
+                "schema_ok": true,
+                "gen_s": 15.3,
+                "parses": true,
+                "exec_s": 0.7,
+                "ran": false,
+                "validated": false,
+                "category": "other",
+                "error": "ValueError: not enough values to unpack (expected 2, got 0)"
+              }
+            ],
+            "ok": false,
+            "n_attempts": 3,
+            "wall_s": 44.5,
+            "final_category": "other"
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 13.3,
+                "parses": true,
+                "exec_s": 1.0,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              64,
+              64
+            ],
+            "n_attempts": 1,
+            "wall_s": 14.3
+          }
+        ]
+      },
+      "style_terse": {
+        "category": "phrasing",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 12.0,
+                "parses": true,
+                "exec_s": 1.9,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 13.9
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 8.8,
+                "parses": true,
+                "exec_s": 1.9,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 10.7
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 20.1,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 21.9
+          }
+        ]
+      },
+      "style_verbose": {
+        "category": "phrasing",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 9.2,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 11.0
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 8.1,
+                "parses": true,
+                "exec_s": 1.7,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 9.8
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 12.6,
+                "parses": true,
+                "exec_s": 2.0,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 14.6
+          }
+        ]
+      },
+      "style_bullets": {
+        "category": "phrasing",
+        "runs": [
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 9.6,
+                "parses": true,
+                "exec_s": 3.5,
+                "ran": false,
+                "validated": false,
+                "category": "wrong_api_attribute",
+                "error": "AttributeError: 'DeepLens' object has no attribute 'kwargs_single_band'"
+              },
+              {
+                "n": 2,
+                "schema_ok": true,
+                "gen_s": 22.0,
+                "parses": true,
+                "exec_s": 1.1,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 2,
+            "wall_s": 36.2
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 5.2,
+                "parses": true,
+                "exec_s": 1.8,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 7.0
+          },
+          {
+            "attempts": [
+              {
+                "n": 1,
+                "schema_ok": true,
+                "gen_s": 11.1,
+                "parses": true,
+                "exec_s": 2.0,
+                "ran": true,
+                "validated": true
+              }
+            ],
+            "ok": true,
+            "image_shape": [
+              150,
+              150
+            ],
+            "n_attempts": 1,
+            "wall_s": 13.1
+          }
+        ]
+      }
+    }
+  }
+}
